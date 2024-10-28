@@ -1,17 +1,16 @@
-import React, { useContext, useState } from 'react'
 import Section from '../componentsPersonal/section/Section'
 import Article from '../componentsPersonal/section/Article'
 import Title from '../componentsPersonal/title/Title'
 import MyButton from '../componentsPersonal/button/MyButton'
 import useFetch from '../hooks/useFetch'
 import { PageContext } from '../context/PageContext'
-import { Genres } from '../types/interfaces'
 import Skeleton from '../componentsPersonal/skeleton/Skeleton'
 import Card from '../componentsPersonal/card/Card'
 import PlatformIcon from '../componentsPersonal/iconList/PlatformIcon'
 import { AiTwotoneLike } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { BiSolidShow } from 'react-icons/bi'
+import { useContext, useState } from 'react'
 
 const GenresPage = () => {
 

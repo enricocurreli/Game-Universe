@@ -2,11 +2,8 @@ import { ParamsType } from "../types/paramsTypes";
 import { useLoaderData, useParams } from "react-router-dom";
 import Navbar from "../componentsPersonal/navbar/Navbar";
 import useFetch from "../hooks/useFetch";
-import { profile } from "console";
 import { format } from 'date-fns';
-import { enGB, it } from 'date-fns/locale';
-import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { Button } from "../components/ui/button";
+import { enGB } from 'date-fns/locale';
 import Card from "../componentsPersonal/card/Card";
 import Footer from "../componentsPersonal/footer/Footer";
 import Img from "../componentsPersonal/img/Img";
@@ -14,14 +11,15 @@ import Paragraph from "../componentsPersonal/paragraph/Paragraph";
 import Article from "../componentsPersonal/section/Article";
 import Title from "../componentsPersonal/title/Title";
 import Section from "../componentsPersonal/section/Section";
-import { Result } from "../types/interfaces";
 import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
 import { BorderBeam } from "../components/ui/border-beam";
+import { GameDetails } from "../types/interfaces";
 
 const DetailGamePage = () => {
-  const game: Result = useLoaderData();
+  const game: GameDetails = useLoaderData();
   const { id } = useParams();
   const API_KEY = import.meta.env.VITE_API_KEY;
+console.log(game);
 
     
   // SCREENSHOT
@@ -57,7 +55,7 @@ const DetailGamePage = () => {
             </Paragraph>
             <Paragraph classes={"text-accent"}>
               Genres:{" "}
-              {game.genres.map((el) => {
+              {game.genres.map((el: GameDetails) => {
                 return (
                   <li className="font-bold list-none" key={el.id}>
                     {" "}
@@ -70,7 +68,7 @@ const DetailGamePage = () => {
               Publishers:{" "}
               <div className="font-bold">
                 {" "}
-                {game.publishers.map((el) => el.name)}{" "}
+                {game.publishers.map((el: GameDetails) => el.name)}{" "}
               </div>{" "}
             </Paragraph>
             <Paragraph classes={"text-accent"}>

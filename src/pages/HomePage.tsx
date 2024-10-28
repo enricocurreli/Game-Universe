@@ -17,16 +17,16 @@ const HomePage = () => {
     throw new Error("usePageContext must be used within a PageContextProvider");
   }
 
-  const { page, nextPage, prevPage, startPage } = context;
+  const { startPage } = context;
 
   const API_KEY = import.meta.env.VITE_API_KEY;
-  let url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-09-01,2024-10-26&platforms=4,187,18,1,186,7`;
+  const url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-09-01,2024-10-26&platforms=4,187,18,1,186,7`;
 
-  let url1 = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-01-01,2024-10-26&platforms=4,187,18,1,186,7`;
+  const url1 = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-01-01,2024-10-26&platforms=4,187,18,1,186,7`;
 
-  let url2 = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2025-01-01,2025-10-26&platforms=4,187,18,1,186,7`;
+  const url2 = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2025-01-01,2025-10-26&platforms=4,187,18,1,186,7`;
 
-  const { data, isLoading, error } = useFetch(url);
+  const { data, isLoading } = useFetch(url);
   const { data:games, isLoading:loding} = useFetch(url1);
   const { data:gamesNext, isLoading:lodingNext} = useFetch(url2);
 

@@ -19,7 +19,7 @@ const NewReleasesPage = () => {
 
   const { page, nextPage, prevPage, startPage } = context;
     const API_KEY = import.meta.env.VITE_API_KEY;
-    let url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-09-01,2024-10-26&page=${page}&page_size=16`;
+    const url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-09-01,2024-10-26&page=${page}&page_size=16`;
     const { data: games, isLoading: loading } = useFetch(url);
 
   return (

@@ -10,7 +10,7 @@ const DropPlatforms = ({ children}:  { children: ReactNode }) => {
   const {data: platforms} = useFetch(
     ` https://api.rawg.io/api/platforms/lists/parents?key=${API_KEY}`
   );
-  const results = platforms?.results;
+
   const context = useContext(PageContext);
   if (!context) {
     throw new Error("usePageContext must be used within a PageContextProvider");

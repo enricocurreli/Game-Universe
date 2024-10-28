@@ -8,7 +8,6 @@ export default function PlatformIcon({ platforms } :{ platforms: Platform[] }) {
       {platforms && platforms.length > 0 && platforms.map((platform) => {
         const platformName = platform.platform && platform.platform.name;
         const icon = platformName && Icons[platformName];
-        const urlPlatformName = platformName && platformName.replace(/\s+/g, '-').replace(/[^\w-]/g, '');
 
         return platform.platform && icon ? (
           <div key={platform.platform.id} className="flex items-center gap-3">

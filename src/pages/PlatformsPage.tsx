@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import useFetch from "../hooks/useFetch";
 import { PageContext } from "../context/PageContext";
 import { Link, useParams } from "react-router-dom";
@@ -11,13 +11,12 @@ import { AiTwotoneLike } from "react-icons/ai";
 import { BiSolidShow } from "react-icons/bi";
 import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
 import MyButton from "../componentsPersonal/button/MyButton";
-import { Tags } from "../types/interfaces";
 
 const PlatformsPage = () => {
 
   const API_KEY = import.meta.env.VITE_API_KEY;
   const {id, slug, index} = useParams();
-  const { data: platforms, isLoading: loading } = useFetch(
+  const { data: platforms } = useFetch(
     ` https://api.rawg.io/api/platforms/lists/parents?key=${API_KEY}`
   );
  
@@ -46,8 +45,8 @@ const PlatformsPage = () => {
     setBtnActive(all);
   }
   
- 
-  const buttons = platforms ? platforms.results[index].platforms : [];
+  const numericIndex = Number(index)
+  const buttons = platforms ? platforms.results[numericIndex].platforms : [];
   const buttonCount = buttons.length;
 
 
@@ -70,10 +69,8 @@ const PlatformsPage = () => {
           <MyButton classes={(btnActive == "All" ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} click={()=>handleClick(0, "All")}>All</MyButton>
               {
                 platforms &&
-                platforms.results[index].platforms.map(( platform: Tags ) => {
-                    // console.log("plat.id", platform.id);
-                    // console.log("btnActive: ", btnActive);
-    
+                platforms.results[numericIndex].platforms.map(( platform ) => {
+                    
                     return <MyButton click={()=> handleClick(platform.id, platform.name)} classes={(btnActive == platform.name ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} key={platform.id}>{platform.name}</MyButton>;
                  
                   

@@ -8,7 +8,7 @@ import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
 import { AiTwotoneLike } from "react-icons/ai";
 import { BiSolidShow } from "react-icons/bi";
 import Skeleton from "../componentsPersonal/skeleton/Skeleton";
-import MyButton from "../componentsPersonal/button/MyButton";
+
 import { useContext } from "react";
 import { PageContext } from "../context/PageContext";
 
@@ -18,9 +18,9 @@ const NextReleasesPage = () => {
     throw new Error("usePageContext must be used within a PageContextProvider");
   }
 
-  const { page, nextPage, prevPage,startPage } = context;
+  const { page,startPage } = context;
     const API_KEY = import.meta.env.VITE_API_KEY;
-    let url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2025-01-01,2025-10-26&page=${page}&page_size=16`;
+    const url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2025-01-01,2025-10-26&page=${page}&page_size=16`;
     const { data: games, isLoading: loading } = useFetch(url);
   return (
     <>
