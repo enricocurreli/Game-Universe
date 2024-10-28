@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, RefObject, SetStateAction } from "react";
 
 export interface PlatformRequirements {
     minimum: string;
@@ -6,7 +6,7 @@ export interface PlatformRequirements {
   }
   
   export interface Platform {
-    platform: any;
+    platform: object;
     id: number;
     slug: string;
     name: string;
@@ -82,16 +82,16 @@ export interface PlatformRequirements {
   } 
   export interface PageContextProps {
     page: number;
-    scrolled: React.RefObject<HTMLDivElement>;
+    scrolled: RefObject<HTMLDivElement>;
     scrollY: number;
-    idPlat: number
+    idPlat: number | string;
     btnActive: number | boolean | string;
     prevPage: () => void;
     nextPage: () => void;
     startPage: () => void;
-    setPage: React.Dispatch<React.SetStateAction<number | string>>;
-    setIDPlat:  React.Dispatch<React.SetStateAction<number | string>>;
-    setBtnActive:  React.Dispatch<React.SetStateAction<number | boolean | string>>;
+    setPage: Dispatch<SetStateAction<number>>;
+    setIDPlat:  Dispatch<SetStateAction<number | string>>;
+    setBtnActive:  Dispatch<SetStateAction<number | boolean | string>>;
 }
   export interface PageContextProviderProps {
     children: ReactNode;

@@ -2,14 +2,15 @@ import { createContext, useState } from 'react';
 import useScroll from '../hooks/useScroll';
 import { PageContextProps, PageContextProviderProps } from '../types/interfaces';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const PageContext =  createContext <PageContextProps | undefined>(undefined);
 
 export const PageContextProvider = ({ children }: PageContextProviderProps) => {
     
     const [page, setPage] = useState<number>(1);
     const [scrolled, scrollY] = useScroll();
-    const [idPlat, setIDPlat] = useState<number>(0);
-    const [btnActive, setBtnActive] = useState<number>(0);
+    const [idPlat, setIDPlat] = useState<number | string>(0);
+    const [btnActive, setBtnActive] = useState<number | boolean | string>(0);
 
     const nextPage = () => {
         if (page <= 511) {
