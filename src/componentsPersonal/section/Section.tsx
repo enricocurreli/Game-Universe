@@ -4,13 +4,13 @@ import { SectionProps } from "../../types/sectionTypes"
 
 
 
-const Section = ({children, classes}:SectionProps) => {
+const Section = ({children, classes, id}:SectionProps) => {
 
   const {scrolled} = useContext(PageContext)
  
 
   return (
-    <section className={classes} ref={scrolled}>
+    <section className={classes} ref={scrolled} id={id}>
           {children}
     </section>
   )

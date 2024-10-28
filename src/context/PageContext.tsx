@@ -8,6 +8,8 @@ export const PageContextProvider = ({ children }: PageContextProviderProps) => {
     
     const [page, setPage] = useState<number>(1);
     const [scrolled, scrollY] = useScroll();
+    const [idPlat, setIDPlat] = useState<number>(0);
+    const [btnActive, setBtnActive] = useState<number>(0);
 
     const nextPage = () => {
         if (page <= 511) {
@@ -38,7 +40,7 @@ export const PageContextProvider = ({ children }: PageContextProviderProps) => {
     
     
     
-      const obj = {page, scrolled, scrollY, prevPage, nextPage, startPage, setPage}
+      const obj = {page, scrolled, scrollY, prevPage, nextPage, startPage, setPage, idPlat, setIDPlat, btnActive, setBtnActive}
     
       return(
     

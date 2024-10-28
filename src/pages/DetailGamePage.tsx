@@ -22,7 +22,7 @@ const DetailGamePage = () => {
   const game: Result = useLoaderData();
   const { id } = useParams();
   const API_KEY = import.meta.env.VITE_API_KEY;
-    console.log(game);
+
     
   // SCREENSHOT
   const url = `https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`;
@@ -32,6 +32,7 @@ const DetailGamePage = () => {
   const url_DLC = `https://api.rawg.io/api/games/${id}/additions?key=${API_KEY}`;
   const { data: dlc, isLoading: loadingDLC } = useFetch(url_DLC);
 
+  
   
 
   return (
@@ -145,7 +146,7 @@ const DetailGamePage = () => {
               screenshots &&
               screenshots.results.map((el, i) => {
                 if (i == 5) {
-                  return <Img key={el.id} src={el.image} />;
+                  return <Img alt={el.name} key={el.id} src={el.image} />;
                 }
               })
             )}
@@ -168,7 +169,7 @@ const DetailGamePage = () => {
               screenshots &&
               screenshots.results.map((el, i) => {
                 if (i > 0 && i < 5) {
-                  return <Img key={el.id} src={el.image} />;
+                  return <Img alt={el.name} key={el.id} src={el.image} />;
                 }
               })
             )}
@@ -191,6 +192,7 @@ const DetailGamePage = () => {
           ) : (
             dlc &&
             dlc.results.map((DLC) => {
+              
               return (
                 <Card key={DLC.id}>
                 {" "}

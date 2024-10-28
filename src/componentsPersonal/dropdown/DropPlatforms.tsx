@@ -18,11 +18,15 @@ const DropPlatforms = ({ children}:  { children: ReactNode }) => {
   const isActive = (obj: {isActive: boolean}) =>
     obj.isActive ? 'text-white  bg-accent p-3 rounded-none px-8 text-center flex justify-center' : 'text-white p-3 rounded-none px-8 hover:bg-accent text-center flex justify-center';
 
-  const { page, nextPage, prevPage,startPage,setPage } = context;
+  const {setIDPlat,startPage,setPage, btnActive, setBtnActive } = context;
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
+  const toggleDropdown = () =>{
+    setIsOpen((prev) => !prev);
+    setBtnActive(true)
+    
+  } 
   
 
   const handleClick = ()=>{
@@ -30,11 +34,13 @@ const DropPlatforms = ({ children}:  { children: ReactNode }) => {
     setIsOpen(false);
     setPage(1);
     startPage();
+    setIDPlat(0)
+    setBtnActive("All")
   }
 // console.log(results);
 
   return (
-    <div className="dropdown  dropdown-bottom text-white p-3 rounded-none px-8 hover:bg-accent">
+    <div className={btnActive ? "dropdown  dropdown-bottom text-white p-3 rounded-none px-8 bg-accent " : "dropdown  dropdown-bottom text-white p-3 rounded-none px-8 hover:bg-accent " } >
       <div
         tabIndex={0}
         role="button"
@@ -46,7 +52,7 @@ const DropPlatforms = ({ children}:  { children: ReactNode }) => {
       {isOpen && (
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-base-100 rounded-box z-[1] w-[450px] grid grid-cols-3 p-2 shadow lg:mt-4 absolute -left-36  "
+          className="dropdown-content menu bg-base-100 rounded-box z-[1] sm:w-[450px] w-[350px] grid grid-cols-3 p-2 shadow lg:mt-4 absolute lg:-left-36  -left-0 "
         >
           {platforms &&
             platforms.results.map((platform,index) => {

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { PageContext } from "../context/PageContext";
 import { Link, useParams } from "react-router-dom";
@@ -12,6 +12,7 @@ import { BiSolidShow } from "react-icons/bi";
 import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
 import MyButton from "../componentsPersonal/button/MyButton";
 import { Tags } from "../types/interfaces";
+
 const PlatformsPage = () => {
 
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -19,15 +20,14 @@ const PlatformsPage = () => {
   const { data: platforms, isLoading: loading } = useFetch(
     ` https://api.rawg.io/api/platforms/lists/parents?key=${API_KEY}`
   );
-  const [idPlat, setIDPlat] = useState<number>(0);
-  const [btnActive, setBtnActive] = useState<number>(0);
+ 
 
   const context = useContext(PageContext);
   if (!context) {
     throw new Error("usePageContext must be used within a PageContextProvider");
   }
 
-  const { setPage, startPage, prevPage, nextPage, page } = context;
+  const { setPage, startPage, prevPage, nextPage, page, idPlat, setIDPlat, btnActive, setBtnActive } = context;
   
   let url;
   
@@ -40,14 +40,17 @@ const PlatformsPage = () => {
   }
   const { data:games, isLoading} = useFetch(url);
   
-  const handleClick = (number:number) =>{
+  const handleClick = (number:number, all:string) =>{
     setPage(1);
-    startPage();
     setIDPlat(number)
-    setBtnActive(number);
+    setBtnActive(all);
   }
   
-  
+ 
+  const buttons = platforms ? platforms.results[index].platforms : [];
+  const buttonCount = buttons.length;
+
+
   return (
     <>
       <Section classes={"my-10 px-16 "}>
@@ -62,21 +65,23 @@ const PlatformsPage = () => {
           </Title>
         </Article>
       </Section>
-      <Section classes={"my-10 px-16 grid grid-cols-8 justify-center gap-2 "}>
-      <MyButton classes={(btnActive == 0 ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} click={()=>handleClick(0)}>All</MyButton>
-          {
-            platforms &&
-            platforms.results[index].platforms.map(( platform: Tags ) => {
-                console.log("plat.id", platform.id);
-                console.log("btnActive: ", btnActive);
-
-                return <MyButton click={()=> handleClick(platform.id)} classes={(btnActive == platform.id ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} key={platform.id}>{platform.name}</MyButton>;
-             
+      {
+        buttonCount > 1 ? (<Section classes={"my-10 px-16 grid sm:grid-cols-8 grid-cols-3 justify-center gap-2 "} id={"buttonSection"}>
+          <MyButton classes={(btnActive == "All" ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} click={()=>handleClick(0, "All")}>All</MyButton>
+              {
+                platforms &&
+                platforms.results[index].platforms.map(( platform: Tags ) => {
+                    // console.log("plat.id", platform.id);
+                    // console.log("btnActive: ", btnActive);
+    
+                    return <MyButton click={()=> handleClick(platform.id, platform.name)} classes={(btnActive == platform.name ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} key={platform.id}>{platform.name}</MyButton>;
+                 
+                  
+                })
+              }
               
-            })
-          }
-          
-      </Section>
+          </Section>) : null
+      }
       <Section classes={"my-20 px-16"}>
         <Article
           classes={

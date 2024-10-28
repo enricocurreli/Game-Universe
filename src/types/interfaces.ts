@@ -55,6 +55,8 @@ export interface PlatformRequirements {
   }
   
   export interface Genres {
+    games?: [object];
+    games_count: number;
     id: number,
     name: string,
     image_background: string,
@@ -82,10 +84,14 @@ export interface PlatformRequirements {
     page: number;
     scrolled: React.RefObject<HTMLDivElement>;
     scrollY: number;
+    idPlat: number
+    btnActive: number | boolean | string;
     prevPage: () => void;
     nextPage: () => void;
     startPage: () => void;
     setPage: React.Dispatch<React.SetStateAction<number>>;
+    setIDPlat:  React.Dispatch<React.SetStateAction<number>>;
+    setBtnActive:  React.Dispatch<React.SetStateAction<number | boolean | string>>;
 }
   export interface PageContextProviderProps {
     children: ReactNode;
