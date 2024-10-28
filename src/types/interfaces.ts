@@ -6,6 +6,7 @@ export interface PlatformRequirements {
   }
   
   export interface Platform {
+    platform: any;
     id: number;
     slug: string;
     name: string;
