@@ -4,7 +4,7 @@ import Title from "../componentsPersonal/title/Title";
 import Card from "../componentsPersonal/card/Card";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
+// import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
 import { AiTwotoneLike } from "react-icons/ai";
 import { BiSolidShow } from "react-icons/bi";
 import Skeleton from "../componentsPersonal/skeleton/Skeleton";
@@ -72,7 +72,7 @@ const NextReleasesPage = () => {
                     {game.name}
                   </Card.Title>
                   <div className="flex justify-around">
-                    <PlatformIcon platforms={game.platforms} />
+                    {/* <PlatformIcon platforms={game.platforms} /> */}
                     
                   </div>
 

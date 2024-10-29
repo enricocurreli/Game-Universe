@@ -6,7 +6,6 @@ import useFetch from '../hooks/useFetch'
 import { PageContext } from '../context/PageContext'
 import Skeleton from '../componentsPersonal/skeleton/Skeleton'
 import Card from '../componentsPersonal/card/Card'
-import PlatformIcon from '../componentsPersonal/iconList/PlatformIcon'
 import { AiTwotoneLike } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { BiSolidShow } from 'react-icons/bi'
@@ -59,7 +58,9 @@ const GenresPage = () => {
                 genres &&
                 genres.results.map(( genre) => {
                                      
-                    return <MyButton click={()=> handleClick(genre.id,genre.name)} classes={(genreBTN == genre.name ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} key={genre.id}>{genre.name}</MyButton>;
+                    if(genre.id){
+                      return <MyButton click={()=> handleClick(genre.id!,genre.name)} classes={(genreBTN == genre.name ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} key={genre.id}>{genre.name}</MyButton>;
+                    }
                  
                   
                 })
@@ -97,7 +98,7 @@ const GenresPage = () => {
                       {game.name}
                     </Card.Title>
                     <div className="flex justify-around">
-                      <PlatformIcon platforms={game.platforms} />
+                     
                       
                     </div>
 

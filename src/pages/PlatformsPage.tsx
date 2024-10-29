@@ -9,7 +9,6 @@ import Skeleton from "../componentsPersonal/skeleton/Skeleton";
 import Card from "../componentsPersonal/card/Card";
 import { AiTwotoneLike } from "react-icons/ai";
 import { BiSolidShow } from "react-icons/bi";
-import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
 import MyButton from "../componentsPersonal/button/MyButton";
 
 const PlatformsPage = () => {
@@ -108,7 +107,7 @@ const PlatformsPage = () => {
                       {game.name}
                     </Card.Title>
                     <div className="flex justify-around">
-                      <PlatformIcon platforms={game.platforms} />
+                      
                       
                     </div>
 

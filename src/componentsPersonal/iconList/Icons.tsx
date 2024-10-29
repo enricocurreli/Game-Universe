@@ -7,7 +7,7 @@ import { LuComputer } from "react-icons/lu";
 import { RiXboxLine } from "react-icons/ri";
 import { LiaXbox } from "react-icons/lia";
 
-export const Icons = {
+export const Icons: { [key: string]: React.ReactNode } = {
     'PC': <FaWindows className="platform-icon" />,
     'Xbox One': <RiXboxLine className="platform-icon" />,
     'PlayStation 4': <SiPlaystation4 className="platform-icon" />,

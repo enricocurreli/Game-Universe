@@ -1,7 +1,4 @@
-import { ParamsType } from "../types/paramsTypes";
-import { useLoaderData, useParams } from "react-router-dom";
 import Navbar from "../componentsPersonal/navbar/Navbar";
-import useFetch from "../hooks/useFetch";
 import { format } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import Card from "../componentsPersonal/card/Card";
@@ -11,25 +8,27 @@ import Paragraph from "../componentsPersonal/paragraph/Paragraph";
 import Article from "../componentsPersonal/section/Article";
 import Title from "../componentsPersonal/title/Title";
 import Section from "../componentsPersonal/section/Section";
-import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
+// import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
 import { BorderBeam } from "../components/ui/border-beam";
-import { GameDetails } from "../types/interfaces";
+import { useParams } from "react-router-dom";
+import useGameDetails from "../hooks/useGameDetails";
+import useGameScreenshots from "../hooks/useGameScreenshots";
+import useGameDLC from "../hooks/useGameDLC";
 
 const DetailGamePage = () => {
-  const game: GameDetails = useLoaderData();
-  const { id } = useParams();
+
+
   const API_KEY = import.meta.env.VITE_API_KEY;
-console.log(game);
+  const { id } = useParams();
 
-    
-  // SCREENSHOT
-  const url = `https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`;
-  const { data: screenshots, isLoading: loadingScreen } = useFetch(url);
+  const {data: game} = useGameDetails(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
 
-  // DLC
-  const url_DLC = `https://api.rawg.io/api/games/${id}/additions?key=${API_KEY}`;
-  const { data: dlc, isLoading: loadingDLC } = useFetch(url_DLC);
+  const { data: dlc, isLoading: loadingDLC } = useGameDLC(`https://api.rawg.io/api/games/${id}/additions?key=${API_KEY}`);
 
+  const { data: screenshots, isLoading: loadingScreen } = useGameScreenshots(`https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`);
+
+
+  console.log(dlc);
   
   
 
@@ -37,7 +36,7 @@ console.log(game);
     <>
       <Navbar />
       <Section classes={"relative"}>
-        <Img src={game.background_image} classes={"imgDetail"} alt={game.name} />
+        <Img src={game?.background_image} classes={"imgDetail"} alt={game?.name} />
         <Article
           classes={
             "backdrop-blur-lg bg-base-200/70  px-10 py-6 shadow-xl sm:max-h-[500px] sm:w-1/2  absolute md:right-[25%] md:top-[35%] max-h-[400px] w-full top-[25%]"
@@ -46,16 +45,16 @@ console.log(game);
             <BorderBeam size={260} duration={10} delay={9} />
 
           <Title tag={"h3"} classes={"text-center text-3xl  mb-6"}>
-          <span className="font-extrabold text-accent"> ⟨ </span> {game.name} <span className="font-extrabold text-accent"> ⟩ </span>
+          <span className="font-extrabold text-accent"> ⟨ </span> {game?.name} <span className="font-extrabold text-accent"> ⟩ </span>
           </Title>
           <div className="grid md:grid-cols-3 grid-cols-2 gap-5 ">
             <Paragraph classes={"text-accent"}>
               Available for:{" "}
-              <PlatformIcon platforms={game.platforms} />
+              {/* <PlatformIcon platforms={game?.platforms} /> */}
             </Paragraph>
             <Paragraph classes={"text-accent"}>
               Genres:{" "}
-              {game.genres.map((el: GameDetails) => {
+              {game?.genres.map((el) => {
                 return (
                   <li className="font-bold list-none" key={el.id}>
                     {" "}
@@ -68,18 +67,18 @@ console.log(game);
               Publishers:{" "}
               <div className="font-bold">
                 {" "}
-                {game.publishers.map((el: GameDetails) => el.name)}{" "}
+                {game?.publishers.map((el) => el.name)}{" "}
               </div>{" "}
             </Paragraph>
             <Paragraph classes={"text-accent"}>
-              Released: <div className="font-bold">{format(new Date(game.released), "dd MMMM yyyy", { locale: enGB })}</div>
+              Released: <div className="font-bold">{game?.released ? format(new Date(game.released), "dd MMMM yyyy", { locale: enGB }) : " "}</div>
             </Paragraph>
             <Paragraph classes={"text-accent"}>
-              Rating : <div className="font-bold">{game.rating} / 5</div>
+              Rating : <div className="font-bold">{game?.rating} / 5</div>
             </Paragraph>
             <Paragraph classes={"text-accent"}>
               Ratings Count :{" "}
-              <div className="font-bold">{game.ratings_count}</div>
+              <div className="font-bold">{game?.ratings_count}</div>
             </Paragraph>
             {/* {profile && (
               <div
@@ -109,11 +108,11 @@ console.log(game);
             {" "}
             <span className="font-extrabold text-accent"> ⟨ </span>About<span className="font-extrabold text-accent"> ⟩ </span>
           </Title>
-          <Paragraph classes={""}>{game.description_raw}</Paragraph>
+          <Paragraph classes={""}>{game?.description_raw}</Paragraph>
           <Paragraph classes={"mt-5"}>
             tags:{" "}
             <span className="px-3">
-              {game.tags
+              {game?.tags
                 ? game.tags.map((tag) => (
                     <div
                       key={tag.id}
@@ -189,7 +188,8 @@ console.log(game);
             </div>
           ) : (
             dlc &&
-            dlc.results.map((DLC) => {
+            dlc.results?.map((DLC) => {
+              console.log(DLC);
               
               return (
                 <Card key={DLC.id}>
@@ -200,7 +200,7 @@ console.log(game);
                   classes={"h-64 w-full rounded-t-2xl "}
                 />
                 <div className="card-body ">
-                  <Card.Title tag="h2" classes={"card-title lg:truncate"}>
+                  <Card.Title tag="h2" classes={"card-title"}>
                     {DLC.name}
                   </Card.Title>
                 </div>{" "}
@@ -234,13 +234,3 @@ console.log(game);
 };
 
 export default DetailGamePage;
-
-export async function detailLoader({ params }: ParamsType) {
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  const promise = await fetch(
-    `https://api.rawg.io/api/games/${params.id}?key=${API_KEY}`
-  );
-  const json = promise.json();
-
-  return json;
-}

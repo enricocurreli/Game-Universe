@@ -4,7 +4,7 @@ import routes from "./routes";
 import HomePage from "../pages/HomePage";
 import PlatformsPage from "../pages/PlatformsPage";
 import GenresPage from "../pages/GenresPage";
-import DetailGamePage, { detailLoader } from "../pages/DetailGamePage";
+import DetailGamePage from "../pages/DetailGamePage";
 import ThisYearsPage from "../pages/ThisYearsPage";
 import NewReleasesPage from "../pages/NewReleasesPage";
 import NextReleasesPage from "../pages/NextReleasesPage";
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
     {
         path:routes.detail,
         element: <DetailGamePage />,
-        loader: detailLoader
+        
     } 
 
 ])

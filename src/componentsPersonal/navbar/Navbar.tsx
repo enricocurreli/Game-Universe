@@ -14,7 +14,7 @@ const Navbar = () => {
     throw new Error("usePageContext must be used within a PageContextProvider");
   }
 
-  const { startPage, setIDPlat, btnActive, setBtnActive } = context;
+  const { startPage, setBtnActive } = context;
   const [scrolled, scrollY] = useScroll();
 
   const isActive = (obj: { isActive: boolean }) =>

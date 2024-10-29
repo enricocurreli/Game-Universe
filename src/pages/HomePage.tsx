@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Card from "../componentsPersonal/card/Card";
 import useFetch from "../hooks/useFetch";
 import { BiSolidShow } from "react-icons/bi";
-import PlatformIcon from "../componentsPersonal/iconList/PlatformIcon";
 import { AiTwotoneLike } from "react-icons/ai";
 import Skeleton from "../componentsPersonal/skeleton/Skeleton";
 import routes from "../router/routes";
@@ -74,7 +73,7 @@ const HomePage = () => {
                       {game.name}
                     </Card.Title>
                     <div className="flex justify-around">
-                    <PlatformIcon platforms={game.platforms} />
+                    
                     
                     </div>
 
@@ -138,7 +137,7 @@ const HomePage = () => {
                       {game.name}
                     </Card.Title>
                     <div className="flex justify-around">
-                    <PlatformIcon platforms={game.platforms} />
+                    
                     
                     </div>
 
@@ -203,7 +202,7 @@ const HomePage = () => {
                       {game.name}
                     </Card.Title>
                     <div className="flex justify-around">
-                    <PlatformIcon platforms={game.platforms} />
+                   
                     
                     </div>
                     <span className="indicator-item badge badge-accent text-white">🔥 {game.released} 🔥</span>
