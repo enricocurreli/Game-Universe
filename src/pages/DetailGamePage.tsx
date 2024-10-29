@@ -28,7 +28,7 @@ const DetailGamePage = () => {
   const { data: screenshots, isLoading: loadingScreen } = useGameScreenshots(`https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`);
 
 
-  console.log(dlc);
+  console.log(game);
   
   
 
@@ -48,8 +48,11 @@ const DetailGamePage = () => {
           <span className="font-extrabold text-accent"> ⟨ </span> {game?.name} <span className="font-extrabold text-accent"> ⟩ </span>
           </Title>
           <div className="grid md:grid-cols-3 grid-cols-2 gap-5 ">
-            <Paragraph classes={"text-accent"}>
+            <Paragraph classes={"text-accent flex flex-col"}>
               Available for:{" "}
+              {game?.parent_platforms.map((platform) =>{
+                return <span className="text-white">{platform.platform.name}</span>
+              })}
               {/* <PlatformIcon platforms={game?.platforms} /> */}
             </Paragraph>
             <Paragraph classes={"text-accent"}>

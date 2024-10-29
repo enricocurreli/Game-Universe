@@ -146,6 +146,14 @@ export interface GameDetails {
     }
   ];
   tags: [Tags];
+  parent_platforms:[{
+    platform: {
+      id: number;
+      name: string;
+      slug: string;
+    }
+  }];
+
   description_raw: string;
   twitch_count: string;
   youtube_count: string;
