@@ -6,8 +6,15 @@ import { SectionProps } from "../../types/sectionTypes"
 
 const Section = ({children, classes, id}:SectionProps) => {
 
-  const {scrolled} = useContext(PageContext)
- 
+
+  const context = useContext(PageContext);
+
+  if (!context) {
+    throw new Error("YourComponent deve essere usato all'interno di PageContextProvider");
+  }
+
+  // Ora puoi accedere a context.scrolled senza errori
+  const { scrolled} = context;
 
   return (
     <section className={classes} ref={scrolled} id={id}>
