@@ -30,7 +30,7 @@ const HomePage = () => {
   const { data:gamesNext, isLoading:lodingNext} = useFetch(url2);
 
   
-
+  
   return (
     <>
     <Section classes={" my-10 px-16 "}>
@@ -59,6 +59,7 @@ const HomePage = () => {
         ) : (
           data &&
           data.results.map((game, index) => {
+            
             if (index < 4) {
               return (
                 <Card key={game.id}>
@@ -73,7 +74,8 @@ const HomePage = () => {
                       {game.name}
                     </Card.Title>
                     <div className="flex justify-around">
-                    
+
+                    {/* <PlatformIcon platforms={platform} />  */}
                     
                     </div>
 

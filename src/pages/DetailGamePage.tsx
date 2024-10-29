@@ -27,11 +27,6 @@ const DetailGamePage = () => {
 
   const { data: screenshots, isLoading: loadingScreen } = useGameScreenshots(`https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`);
 
-
-  console.log(game);
-  
-  
-
   return (
     <>
       <Navbar />
@@ -39,19 +34,19 @@ const DetailGamePage = () => {
         <Img src={game?.background_image} classes={"imgDetail"} alt={game?.name} />
         <Article
           classes={
-            "backdrop-blur-lg bg-base-200/70  px-10 py-6 shadow-xl sm:max-h-[500px] sm:w-1/2  absolute md:right-[25%] md:top-[35%] max-h-[400px] w-full top-[25%]"
+            "backdrop-blur-lg bg-base-200/70  px-10 py-6 shadow-xl sm:max-h-[500px] sm:w-1/2  absolute md:right-[25%] md:top-[35%] max-h-[400px] w-[350px] top-[15%] right-[05%]" 
           }
         >
             <BorderBeam size={260} duration={10} delay={9} />
 
           <Title tag={"h3"} classes={"text-center text-3xl  mb-6"}>
-          <span className="font-extrabold text-accent"> ⟨ </span> {game?.name} <span className="font-extrabold text-accent"> ⟩ </span>
+          <span className="font-extrabold text-accent"> ⟨ </span> {game?.name} <span className="font-extrabold text-accent "> ⟩ </span>
           </Title>
           <div className="grid md:grid-cols-3 grid-cols-2 gap-5 ">
             <Paragraph classes={"text-accent flex flex-col"}>
               Available for:{" "}
               {game?.parent_platforms.map((platform) =>{
-                return <span className="text-white">{platform.platform.name}</span>
+                return <span key={platform.platform.id} className="text-white">{platform.platform.name}</span>
               })}
               {/* <PlatformIcon platforms={game?.platforms} /> */}
             </Paragraph>

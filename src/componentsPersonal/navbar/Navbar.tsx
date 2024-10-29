@@ -120,7 +120,7 @@ const Navbar = () => {
           </NavLink>
         </ul>
       </div>
-      <div className="navbar-end lg:pt-7 sm:pe-10 overflow-hidden">
+      <div className="navbar-end lg:pt-7 sm:pe-10">
         <div className="flex  sm:gap-5 gap-2">
           <button className="btn btn-ghost rounded-none hover:bg-accent bg-base-100">
             <svg

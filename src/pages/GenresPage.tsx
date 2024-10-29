@@ -52,7 +52,7 @@ const GenresPage = () => {
       </Title>
     </Article>
     <Article  classes={"text-xl mb-14 grid justify-center"}>
-    <Section classes={"my-10 px-18 grid md:grid-cols-8 grid-cols-3 justify-center gap-2 "} id={"buttonSection"}>
+    <Section classes={"my-10  md:px-16 grid md:grid-cols-8 grid-cols-3 justify-center gap-2 "} id={"buttonSection"}>
           <MyButton classes={(genreBTN == "All" ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} click={()=>handleClick(0,"All")}>All</MyButton>
               {
                 genres &&

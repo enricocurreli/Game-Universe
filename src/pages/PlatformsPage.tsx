@@ -64,7 +64,7 @@ const PlatformsPage = () => {
         </Article>
       </Section>
       {
-        buttonCount > 1 ? (<Section classes={"my-10 px-16 grid sm:grid-cols-8 grid-cols-3 justify-center gap-2 "} id={"buttonSection"}>
+        buttonCount > 1 ? (<Section classes={"my-10 px-8 md:px-16 grid sm:grid-cols-8 grid-cols-3 justify-center gap-2 "} id={"buttonSection"}>
           <MyButton classes={(btnActive == "All" ? "shadow-none text-white font-[Electrolize] bg-accent rounded-none " : " ") + " rounded-none border-accent text-white hover:bg-accent hover:rounded-none font-[Electrolize]"} click={()=>handleClick(0, "All")}>All</MyButton>
               {
                 platforms &&
