@@ -1,12 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import routes from "../../router/routes";
 import { GiGamepad } from "react-icons/gi";
 import useScroll from "../../hooks/useScroll";
 import { FaUserAstronaut } from "react-icons/fa";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { PageContext } from "../../context/PageContext";
 import DropPlatforms from "../dropdown/DropPlatforms";
 import { MdOutlineGamepad } from "react-icons/md";
+import MyButton from "../button/MyButton";
 
 const Navbar = () => {
   const context = useContext(PageContext);
@@ -14,9 +15,9 @@ const Navbar = () => {
     throw new Error("usePageContext must be used within a PageContextProvider");
   }
 
-  const { startPage, setBtnActive } = context;
+  const { startPage, setBtnActive,setPage } = context;
   const [scrolled, scrollY] = useScroll();
-
+  const navigate = useNavigate();
   const isActive = (obj: { isActive: boolean }) =>
     obj.isActive
       ? "text-white  bg-accent p-3 rounded-none px-8"
@@ -25,6 +26,27 @@ const Navbar = () => {
   const navLinkClick = () => {
     startPage();
     setBtnActive(false);
+  };
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      
+      toggleSearchBar()
+      setSearchTerm(" ")
+      setPage(1)
+      if(searchTerm){
+        navigate(`/results/${searchTerm}`)
+      }
+      
+    }
+  };
+  const toggleSearchBar = () => {
+    setIsOpen((prev) => !prev);
   };
   return (
     <div
@@ -121,23 +143,40 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end lg:pt-7 sm:pe-10">
-        <div className="flex  sm:gap-5 gap-2">
-          <button className="btn btn-ghost rounded-none hover:bg-accent bg-base-100">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="sm:h-7 sm:w-7 h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </button>
+        <div className="flex sm:gap-5 gap-2">
+          {/* SEARCHBAR */}
+         <div className="search-bar-container sm:gap-5">
+         <MyButton
+            click={toggleSearchBar}
+            classes="btn btn-ghost rounded-none hover:bg-accent bg-base-100 "
+          >
+            {!isOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="sm:h-7 sm:w-7 h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            ) : (
+              "X"
+            )}
+          </MyButton>
+          <div className={`search-bar ${isOpen ? "open" : "closed"}`}>
+            <input type="text" placeholder="Search..." className="input-sm" value={searchTerm}
+                    onChange={handleInputChange} // Aggiorna lo stato con il valore dell'input
+                    onKeyDown={handleKeyDown} // Rileva il tasto Invio 
+            />
+          </div>
+         </div>
+          {/* END SEARCHBAR */}
           <div className="dropdown dropdown-end  bg-base-100  hover:bg-accent">
             <div
               tabIndex={0}

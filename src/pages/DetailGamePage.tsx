@@ -26,10 +26,11 @@ const DetailGamePage = () => {
   const { data: dlc, isLoading: loadingDLC } = useGameDLC(`https://api.rawg.io/api/games/${id}/additions?key=${API_KEY}`);
 
   const { data: screenshots, isLoading: loadingScreen } = useGameScreenshots(`https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`);
+console.log(game);
 
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <Section classes={"relative"}>
         <Img src={game?.background_image} classes={"imgDetail"} alt={game?.name} />
         <Article

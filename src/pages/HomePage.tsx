@@ -9,6 +9,7 @@ import Skeleton from "../componentsPersonal/skeleton/Skeleton";
 import routes from "../router/routes";
 import { useContext } from "react";
 import { PageContext } from "../context/PageContext";
+import { Result } from "../types/interfaces";
 
 const HomePage = () => {
   const context = useContext(PageContext);
@@ -25,9 +26,9 @@ const HomePage = () => {
 
   const url2 = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2025-01-01,2025-10-26&platforms=4,187,18,1,186,7`;
 
-  const { data, isLoading } = useFetch(url);
-  const { data:games, isLoading:loding} = useFetch(url1);
-  const { data:gamesNext, isLoading:lodingNext} = useFetch(url2);
+  const { data, isLoading } = useFetch<Result>(url);
+  const { data:games, isLoading:loding} = useFetch<Result>(url1);
+  const { data:gamesNext, isLoading:lodingNext} = useFetch<Result>(url2);
 
   
   

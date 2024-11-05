@@ -10,12 +10,13 @@ import Card from "../componentsPersonal/card/Card";
 import { AiTwotoneLike } from "react-icons/ai";
 import { BiSolidShow } from "react-icons/bi";
 import MyButton from "../componentsPersonal/button/MyButton";
+import { Result } from "../types/interfaces";
 
 const PlatformsPage = () => {
 
   const API_KEY = import.meta.env.VITE_API_KEY;
   const {id, slug, index} = useParams();
-  const { data: platforms } = useFetch(
+  const { data: platforms } = useFetch<Result>(
     ` https://api.rawg.io/api/platforms/lists/parents?key=${API_KEY}`
   );
  
@@ -36,7 +37,7 @@ const PlatformsPage = () => {
 
     url = `https://api.rawg.io/api/games?key=${API_KEY}&parent_platforms=${id}&page=${page}&page_size=16`;
   }
-  const { data:games, isLoading} = useFetch(url);
+  const { data:games, isLoading} = useFetch<Result>(url);
   
   const handleClick = (number:number, all:string) =>{
     setPage(1);

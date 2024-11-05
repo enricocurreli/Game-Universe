@@ -46,11 +46,11 @@ export interface Result {
   parent_platforms: Platform;
 }
 
-export interface ApiResponse {
+export interface ApiResponse<T> {
   count: number;
   next: string;
   previous: string;
-  results: Result[];
+  results: T[];
 }
 
 export interface Genres {
@@ -163,6 +163,7 @@ export interface GameDetails {
   alternative_names?: string[] | null;
   metacritic_url: string;
   parents_count: number;
+  dominant_color: string;
   additions_count: number;
   game_series_count: number;
   esrb_rating: EsrbRating;

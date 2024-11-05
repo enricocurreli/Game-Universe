@@ -10,6 +10,7 @@ import Skeleton from "../componentsPersonal/skeleton/Skeleton";
 import MyButton from "../componentsPersonal/button/MyButton";
 import { useContext } from "react";
 import { PageContext } from "../context/PageContext";
+import { Result } from "../types/interfaces";
 const NewReleasesPage = () => {
   const context = useContext(PageContext);
   if (!context) {
@@ -19,7 +20,7 @@ const NewReleasesPage = () => {
   const { page, nextPage, prevPage, startPage } = context;
     const API_KEY = import.meta.env.VITE_API_KEY;
     const url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-09-01,2024-10-26&page=${page}&page_size=16`;
-    const { data: games, isLoading: loading } = useFetch(url);
+    const { data: games, isLoading: loading } = useFetch<Result>(url);
 
   return (
     <>

@@ -11,6 +11,7 @@ import Skeleton from "../componentsPersonal/skeleton/Skeleton";
 
 import { useContext } from "react";
 import { PageContext } from "../context/PageContext";
+import { Result } from "../types/interfaces";
 
 const NextReleasesPage = () => {
   const context = useContext(PageContext);
@@ -21,7 +22,7 @@ const NextReleasesPage = () => {
   const { page,startPage } = context;
     const API_KEY = import.meta.env.VITE_API_KEY;
     const url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2025-01-01,2025-10-26&page=${page}&page_size=16`;
-    const { data: games, isLoading: loading } = useFetch(url);
+    const { data: games, isLoading: loading } = useFetch<Result>(url);
   return (
     <>
     <Section classes={"mt-10 px-16 "}>

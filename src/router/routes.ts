@@ -7,6 +7,7 @@ const routes = {
     thisYears: '/thisYears',
     nextReleases: '/nextReleases',
     newReleases: '/newReleases',
+    search:'/results/:searchTerm'
 }
 
 export default routes;

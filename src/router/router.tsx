@@ -8,6 +8,7 @@ import DetailGamePage from "../pages/DetailGamePage";
 import ThisYearsPage from "../pages/ThisYearsPage";
 import NewReleasesPage from "../pages/NewReleasesPage";
 import NextReleasesPage from "../pages/NextReleasesPage";
+import SearchPage from "../pages/SearchPage";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
                 path: routes.nextReleases, 
                 element: <NextReleasesPage />,
             },
+            {
+                path: routes.search, 
+                element: <SearchPage />,
+            },
+            
         ]
     },
     {

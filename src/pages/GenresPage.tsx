@@ -10,11 +10,12 @@ import { AiTwotoneLike } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { BiSolidShow } from 'react-icons/bi'
 import { useContext, useState } from 'react'
+import { Result } from '../types/interfaces'
 
 const GenresPage = () => {
 
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const {data: genres} = useFetch(`https://api.rawg.io/api/genres?key=${API_KEY}`);
+  const {data: genres} = useFetch<Result>(`https://api.rawg.io/api/genres?key=${API_KEY}`);
   const [genreBTN, setGenreBTN] = useState("All");
   const [idGen, setIdGen] = useState(0)
   const context = useContext(PageContext);
@@ -40,7 +41,7 @@ const GenresPage = () => {
 
     url = `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}&page_size=16`;
   }
-  const { data:games, isLoading} = useFetch(url);
+  const { data:games, isLoading} = useFetch<Result>(url);
   
   return (
     <>
