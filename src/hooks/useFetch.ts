@@ -18,9 +18,11 @@ const useFetch = <T>(url: string) => {
               const result: ApiResponse<T> = await response.json();
               setData(result);
           } catch (error) {
-              if (error.name !== 'AbortError') {
-                  setError((error as Error).message);
-              }
+            if (error instanceof Error) {
+                setError(error.message);  // Accede a message solo se err è un Error
+            } else {
+                setError('An unknown error occurred');
+            }
           } finally {
               setIsLoading(false);
           }
