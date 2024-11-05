@@ -2,12 +2,13 @@ import useFetch from "../../hooks/useFetch";
 import { NavLink } from "react-router-dom";
 import { ReactNode, useContext, useState } from "react";
 import { PageContext } from "../../context/PageContext";
+import { Result } from "../../types/interfaces";
 
 
 
 const DropPlatforms = ({ children}:  { children: ReactNode }) => {
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const {data: platforms} = useFetch(
+  const {data: platforms} = useFetch<Result>(
     ` https://api.rawg.io/api/platforms/lists/parents?key=${API_KEY}`
   );
 
