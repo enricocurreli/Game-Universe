@@ -39,3 +39,6 @@ const useFetch = <T>(url: string) => {
 };
 
 export default useFetch
+
+//? AbortController:
+// AbortController è utilizzato per annullare una richiesta fetch. In questo modo, se il componente viene smontato prima che la richiesta finisca, la richiesta verrà annullata e non causerà errori o problemi di prestazioni.
